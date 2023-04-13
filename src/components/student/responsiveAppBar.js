@@ -44,22 +44,28 @@ function ResponsiveAppBar({ studentName, mode, setMode, setStudentDetails }) {
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
   };
-
-  const handleCloseNavMenu = (value) => {
+  const handleCloseNavMenu = () => {
     setAnchorElNav(null);
-    navigate(value.route, { state: { type: value.page } });
   };
-
-  const handleCloseUserMenu = (route) => {
+  const handleCloseUserMenu = () => {
     setAnchorElUser(null);
-    navigate(route)
   };
 
-  const logOut = (route) => {
-    setAnchorElNav(null);
-    navigate(route);
+  const moveToNavPage = (value) => {
+    handleCloseNavMenu();
+    navigate(value.route, { state: { type: value.page } });
+  }
+
+  const moveToAccountPage = () => {
+    handleCloseUserMenu();
+    navigate("account");
+  }
+
+  const logOut = () => {
+    handleCloseUserMenu();
     setStudentDetails(null);
     localStorage.removeItem("localStorageStudentId");
+    navigate("/");
   };
 
   const changeMode = () => {
@@ -72,7 +78,6 @@ function ResponsiveAppBar({ studentName, mode, setMode, setStudentDetails }) {
       localStorage.setItem('colorMode', 'dark');
     }
   }
-
 
   return (
     <AppBar position="fixed">
@@ -112,7 +117,7 @@ function ResponsiveAppBar({ studentName, mode, setMode, setStudentDetails }) {
               }}
             >
               {pages.map((value, key) => (
-                <MenuItem onClick={() => handleCloseNavMenu(value)} key={key}>
+                <MenuItem onClick={() => moveToNavPage(value)} key={key}>
                   <Typography textAlign="center">{value.page}</Typography>
                 </MenuItem>
               ))}
@@ -123,7 +128,7 @@ function ResponsiveAppBar({ studentName, mode, setMode, setStudentDetails }) {
           </Box>
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {pages.map((value, key) => (
-              <Button onClick={() => handleCloseNavMenu(value)} sx={{ my: 2, color: "white", display: 'block' }} key={key}>
+              <Button onClick={() => moveToNavPage(value)} sx={{ my: 2, color: "white", display: 'block' }} key={key}>
                 {value.page}
               </Button>
             ))}
@@ -151,13 +156,13 @@ function ResponsiveAppBar({ studentName, mode, setMode, setStudentDetails }) {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
-              <MenuItem onClick={() => handleCloseUserMenu('account')}>
+              <MenuItem onClick={moveToAccountPage}>
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}><PersonIcon sx={{ mr: 1 }} /> {"Account"}</Box>
               </MenuItem>
-              <MenuItem onClick={() => logOut("/")}>
+              <MenuItem onClick={logOut}>
                 <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}><LogoutIcon sx={{ mr: 1 }} /> {"Logout"}</Box>
               </MenuItem>
-              <MenuItem onClick={() => changeMode()}>
+              <MenuItem onClick={changeMode}>
                 {
                   mode === "dark" ? <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}><WbSunnyIcon sx={{ mr: 1 }} /> {"Light"}</Box> : <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}><Brightness2Icon sx={{ mr: 1 }} />{"Dark"}</Box>
                 }
