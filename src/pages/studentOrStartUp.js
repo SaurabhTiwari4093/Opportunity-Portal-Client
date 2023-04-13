@@ -8,7 +8,7 @@ import OpportunityTable from '../components/table';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
-export default function StudentOrStartUp({ BASE_URL, setShowAlert }) {
+export default function StudentOrStartUp({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const [loading, setLoading] = useState(true);
   const [opportunityTableRow, setOpportunityTableRow] = useState([]);
   const navigate = useNavigate();

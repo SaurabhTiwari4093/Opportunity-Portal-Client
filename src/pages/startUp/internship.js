@@ -11,7 +11,7 @@ import JobImage from '../../assets/jobImage.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
 import moment from 'moment';
 
-export default function Internship({ BASE_URL, startUpDetails, setShowAlert }) {
+export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setAlertMessage, setAlertSeverity }) {
   const { type } = useLocation().state;
   const [loading, setLoading] = useState(true);
   const [internshipTableRow, setInternshipTableRow] = useState([]);

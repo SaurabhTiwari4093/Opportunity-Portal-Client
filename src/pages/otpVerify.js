@@ -3,7 +3,7 @@ import React, { useState, useEffect, useCallback } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 import useCountDown from 'react-countdown-hook';
 
-export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetails,setShowAlert }) {
+export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetails,setShowAlert,setAlertMessage, setAlertSeverity }) {
   const { user, signInOrSignUp, email, name } = useLocation().state;
   const [otp, setOtp] = useState('');
   const [loading, setLoading] = useState(false);

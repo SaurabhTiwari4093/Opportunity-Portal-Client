@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Account({ BASE_URL, studentDetails, setStudentDetails,setShowAlert={setShowAlert} }) {
+export default function Account({ BASE_URL, studentDetails, setStudentDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const name = studentDetails.name;
@@ -19,7 +19,6 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails,se
   const updateStudentAccount = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setShowAlert(false);
     const formData = {
       course: course,
       department: department,

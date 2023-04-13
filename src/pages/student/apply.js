@@ -4,7 +4,7 @@ import { useLocation } from 'react-router-dom';
 import moment from 'moment';
 import { useNavigate } from 'react-router-dom';
 
-export default function Apply({ BASE_URL, studentDetails, setShowAlert }) {
+export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
     const navigate = useNavigate();
     const { jobId } = useLocation().state;
     const [loading, setLoading] = useState(true);
@@ -241,7 +241,7 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert }) {
                     {
                         (loading || loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
                             <form onSubmit={submitResume}>
-                                <TextField sx={{mb:2}} type="text" label={"Why should we hire you?"} multiline={true} minRows={4} variant="outlined" value={whyShouldWeHireYou} onChange={(e) => setWhyShouldWeHireYou(e.target.value)} fullWidth required />
+                                <TextField sx={{ mb: 2 }} type="text" label={"Why should we hire you?"} multiline={true} minRows={4} variant="outlined" value={whyShouldWeHireYou} onChange={(e) => setWhyShouldWeHireYou(e.target.value)} fullWidth required />
                                 <Button variant="contained" type="submit" sx={{ width: 120, height: 40 }}>
                                     {
                                         loading3 ? <CircularProgress sx={{ color: "white" }} size={20} /> : <Typography>Submit</Typography>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import AddIcon from '@mui/icons-material/Add';
 import { useNavigate } from 'react-router-dom';
 
-export default function Account({ BASE_URL, startUpDetails, setStartUpDetails,setShowAlert }) {
+export default function Account({ BASE_URL, startUpDetails, setStartUpDetails,setShowAlert,setAlertMessage, setAlertSeverity }) {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [linkedIn, setLinkedIn] = useState(startUpDetails.linkedIn);

@@ -35,6 +35,8 @@ export default function App() {
     const [studentDetails, setStudentDetails] = useState(null);
     const [loading, setLoading] = useState(true);
     const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState("Showing alert");
+    const [alertSeverity, setAlertSeverity] = useState("primary");
 
     const darkTheme = createTheme({
         components: {
@@ -142,23 +144,23 @@ export default function App() {
                                 <Route path="/" element={<JobPortalIndex mode={mode} setMode={setMode} startUpDetails={startUpDetails} studentDetails={studentDetails} />}>
                                     <Route path="/" element={<StudentOrStartUp BASE_URL={BASE_URL} />} />
                                     <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />
-                                    <Route path="signIn" element={<SignIn BASE_URL={BASE_URL} setShowAlert={setShowAlert}/>} />
-                                    <Route path="signUp" element={<SignUp BASE_URL={BASE_URL} setShowAlert={setShowAlert}/>} />
-                                    <Route path="otpVerify" element={<OTPVerify BASE_URL={BASE_URL} setStartUpDetails={setStartUpDetails} setStudentDetails={setStudentDetails} setShowAlert={setShowAlert}/>} />
+                                    <Route path="signIn" element={<SignIn BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
+                                    <Route path="signUp" element={<SignUp BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
+                                    <Route path="otpVerify" element={<OTPVerify BASE_URL={BASE_URL} setStartUpDetails={setStartUpDetails} setStudentDetails={setStudentDetails} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
                                 </Route>
 
                                 <Route path="student" element={<StudentIndex mode={mode} setMode={setMode} studentDetails={studentDetails} setStudentDetails={setStudentDetails} />}>
-                                    <Route path="internship" element={<StudentInternship BASE_URL={BASE_URL} studentDetails={studentDetails}  setShowAlert={setShowAlert}/>} />
-                                    <Route path="account" element={<StudentAccount BASE_URL={BASE_URL} studentDetails={studentDetails} setStudentDetails={setStudentDetails}  setShowAlert={setShowAlert}/>} />
+                                    <Route path="internship" element={<StudentInternship BASE_URL={BASE_URL} studentDetails={studentDetails}  setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
+                                    <Route path="account" element={<StudentAccount BASE_URL={BASE_URL} studentDetails={studentDetails} setStudentDetails={setStudentDetails}  setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
                                     <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />
-                                    <Route path="apply" element={<StudentApply BASE_URL={BASE_URL} studentDetails={studentDetails} setShowAlert={setShowAlert}/>} />
+                                    <Route path="apply" element={<StudentApply BASE_URL={BASE_URL} studentDetails={studentDetails} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
                                 </Route>
 
                                 <Route path="startUp" element={<StartUpIndex mode={mode} setMode={setMode} startUpDetails={startUpDetails} setStartUpDetails={setStartUpDetails} />}>
-                                    <Route path="internship" element={<StartUpInternship BASE_URL={BASE_URL} startUpDetails={startUpDetails} setShowAlert={setShowAlert}/>} />
+                                    <Route path="internship" element={<StartUpInternship BASE_URL={BASE_URL} startUpDetails={startUpDetails} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
                                     <Route path="account" element={<StartUpAccount BASE_URL={BASE_URL} startUpDetails={startUpDetails} setStartUpDetails={setStartUpDetails} />} />
-                                    <Route path="addNew" element={<StartUpAddNew BASE_URL={BASE_URL} setShowAlert={setShowAlert}/>} />
-                                    <Route path="studentsApplied" element={<StudentsApplied BASE_URL={BASE_URL} setShowAlert={setShowAlert}/>} />
+                                    <Route path="addNew" element={<StartUpAddNew BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
+                                    <Route path="studentsApplied" element={<StudentsApplied BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>} />
                                     <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={startUpDetails} />} />
                                 </Route>
 
@@ -166,7 +168,7 @@ export default function App() {
                             </Routes>
                         </BrowserRouter >
                         {
-                            showAlert ? <AlertSnackbar message={"Congratulations! Your signin was successful"} severity={"success"} timer={timer} /> : <></>
+                            showAlert ? <AlertSnackbar message={alertMessage} severity={alertSeverity} timer={timer} /> : <></>
                         }
                     </>
 

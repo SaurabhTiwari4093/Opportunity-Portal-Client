@@ -9,7 +9,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import PopOver from '../../components/student/popOver';
 import moment from 'moment';
 
-export default function Internship({ BASE_URL, studentDetails,timer }) {
+export default function Internship({ BASE_URL, studentDetails,setShowAlert,setAlertMessage, setAlertSeverity}) {
   const { type } = useLocation().state;
   const [loading, setLoading] = useState(true);
   const [internshipTableRow, setInternshipTableRow] = useState([]);
@@ -144,7 +144,7 @@ export default function Internship({ BASE_URL, studentDetails,timer }) {
       headerName: 'Apply',
       flex: 1,
       renderCell: ({ value }) => {
-        return <PopOver jobId={value.jobId} status={value.status} studentDetails={studentDetails} deadline={value.deadline}/>
+        return <PopOver jobId={value.jobId} status={value.status} studentDetails={studentDetails} deadline={value.deadline} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>
       }
     },
   ];

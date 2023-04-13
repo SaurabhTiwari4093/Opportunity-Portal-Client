@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, Container, Typography, TextField, CardAc
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function SignUp({ BASE_URL,setShowAlert }) {
+export default function SignUp({ BASE_URL,setShowAlert,setAlertMessage, setAlertSeverity }) {
   const { user } = useLocation().state;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');

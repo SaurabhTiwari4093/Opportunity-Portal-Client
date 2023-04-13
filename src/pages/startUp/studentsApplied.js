@@ -6,7 +6,7 @@ import { useLocation } from 'react-router-dom';
 import PopOver from '../../components/startUp/popOver';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-export default function StudentsApplied({ BASE_URL, setShowAlert }) {
+export default function StudentsApplied({ BASE_URL, setShowAlert,setAlertMessage, setAlertSeverity }) {
     const { jobId } = useLocation().state;
     const [loading, setLoading] = useState(true);
     const [studentsAppliedTableRow, setStudentsAppliedTableRow] = useState([]);
@@ -129,7 +129,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert }) {
             headerName: 'Update Status',
             width: 180,
             renderCell: ({ value }) => {
-                return <PopOver status={value.status} studentId={value.studentId} jobId={jobId} BASE_URL={BASE_URL} setShowAlert={setShowAlert} />
+                return <PopOver status={value.status} studentId={value.studentId} jobId={jobId} BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>
             }
         },
     ];

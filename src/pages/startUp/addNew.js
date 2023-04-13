@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
-export default function AddNew({ BASE_URL, setShowAlert }) {
+export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAlertSeverity }) {
     const navigate = useNavigate();
     const { type, companyName, startUpId, jobId } = useLocation().state;
     const [designation, setDesignation] = useState('');
