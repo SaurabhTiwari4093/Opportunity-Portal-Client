@@ -1,9 +1,8 @@
 import { Card, CardContent, CardHeader, Container, Typography, TextField, CardActions, Button, CircularProgress } from '@mui/material';
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
-import swal from 'sweetalert';
 
-export default function SignUp({ BASE_URL, timer }) {
+export default function SignUp({ BASE_URL,setShowAlert }) {
   const { user } = useLocation().state;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -14,12 +13,13 @@ export default function SignUp({ BASE_URL, timer }) {
     e.preventDefault();
     setLoading(true);
     if (email.substring(email.length - 10, email.length) !== "iitd.ac.in") {
-      swal({
-        title: "Not a IITD email ID",
-        text: "Please enter IIT Delhi email ID",
-        icon: "info",
-        timer: timer
-      })
+      // swal({
+      //   title: "Not a IITD email ID",
+      //   text: "Please enter IIT Delhi email ID",
+      //   icon: "info",
+      //   timer: timer
+      // })
+      setShowAlert(true);
       setLoading(false);
       return
     }
@@ -46,12 +46,13 @@ export default function SignUp({ BASE_URL, timer }) {
             }
             else if (data.status === 401) {
               setLoading(false);
-              swal({
-                title: "Account already exist",
-                text: "Please sign in to your account",
-                icon: "info",
-                timer: timer
-              });
+              // swal({
+              //   title: "Account already exist",
+              //   text: "Please sign in to your account",
+              //   icon: "info",
+              //   timer: timer
+              // });
+              setShowAlert(true);
             }
             else {
               console.log(data);
@@ -89,12 +90,13 @@ export default function SignUp({ BASE_URL, timer }) {
           }
           else if (data.status === 401) {
             setLoading(false);
-            swal({
-              title: "Account already exist",
-              text: "Please sign in to your account",
-              icon: "info",
-              timer: timer
-            });
+            // swal({
+            //   title: "Account already exist",
+            //   text: "Please sign in to your account",
+            //   icon: "info",
+            //   timer: timer
+            // });
+            setShowAlert(true);
           }
           else {
             console.log(data);

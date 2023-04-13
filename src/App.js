@@ -21,11 +21,12 @@ import darkScrollbar from '@mui/material/darkScrollbar';
 import { useEffect, useState } from "react";
 import { Box, CircularProgress } from "@mui/material";
 import useMediaQuery from '@mui/material/useMediaQuery';
+import AlertSnackbar from "../src/components/snackbar";
 
-//const BASE_URL = 'http://localhost:3000';
-const BASE_URL = 'https://opportunity-portal.edciitd.com';
+const BASE_URL = 'http://localhost:3000';
+//const BASE_URL = 'https://opportunity-portal.edciitd.com';
 
-const timer = 1500;
+const timer = 2000;
 
 export default function App() {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
@@ -33,6 +34,7 @@ export default function App() {
     const [startUpDetails, setStartUpDetails] = useState(null);
     const [studentDetails, setStudentDetails] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showAlert, setShowAlert] = useState(false);
 
     const darkTheme = createTheme({
         components: {
@@ -121,11 +123,11 @@ export default function App() {
         if (localStorage.getItem('colorMode') === 'dark') {
             setMode('dark');
         }
-        else if(localStorage.getItem('colorMode') === 'light'){
+        else if (localStorage.getItem('colorMode') === 'light') {
             setMode('light');
         }
-        else{
-            setMode(prefersDarkMode?'dark':'light');
+        else {
+            setMode(prefersDarkMode ? 'dark' : 'light');
         }
     }, [])
 
@@ -134,34 +136,40 @@ export default function App() {
             <CssBaseline />
             {
                 loading ? <Box sx={{ height: "100vh", width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}><CircularProgress /></Box> :
-                    <BrowserRouter>
-                        <Routes>
-                            <Route path="/" element={<JobPortalIndex mode={mode} setMode={setMode} startUpDetails={startUpDetails} studentDetails={studentDetails} />}>
-                                <Route path="/" element={<StudentOrStartUp BASE_URL={BASE_URL} timer={timer} />} />
-                                <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />
-                                <Route path="signIn" element={<SignIn BASE_URL={BASE_URL} />} timer={timer} />
-                                <Route path="signUp" element={<SignUp BASE_URL={BASE_URL} />} timer={timer} />
-                                <Route path="otpVerify" element={<OTPVerify BASE_URL={BASE_URL} setStartUpDetails={setStartUpDetails} setStudentDetails={setStudentDetails} timer={timer} />} />
-                            </Route>
+                    <>
+                        <BrowserRouter>
+                            <Routes>
+                                <Route path="/" element={<JobPortalIndex mode={mode} setMode={setMode} startUpDetails={startUpDetails} studentDetails={studentDetails} />}>
+                                    <Route path="/" element={<StudentOrStartUp BASE_URL={BASE_URL} />} />
+                                    <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />
+                                    <Route path="signIn" element={<SignIn BASE_URL={BASE_URL} setShowAlert={setShowAlert}/>} />
+                                    <Route path="signUp" element={<SignUp BASE_URL={BASE_URL} setShowAlert={setShowAlert}/>} />
+                                    <Route path="otpVerify" element={<OTPVerify BASE_URL={BASE_URL} setStartUpDetails={setStartUpDetails} setStudentDetails={setStudentDetails} setShowAlert={setShowAlert}/>} />
+                                </Route>
 
-                            <Route path="student" element={<StudentIndex mode={mode} setMode={setMode} studentDetails={studentDetails} setStudentDetails={setStudentDetails} />}>
-                                <Route path="internship" element={<StudentInternship BASE_URL={BASE_URL} studentDetails={studentDetails} timer={timer} />} />
-                                <Route path="account" element={<StudentAccount BASE_URL={BASE_URL} studentDetails={studentDetails} setStudentDetails={setStudentDetails} timer={timer} />} />
-                                <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />
-                                <Route path="apply" element={<StudentApply BASE_URL={BASE_URL} studentDetails={studentDetails} timer={timer} />} />
-                            </Route>
+                                <Route path="student" element={<StudentIndex mode={mode} setMode={setMode} studentDetails={studentDetails} setStudentDetails={setStudentDetails} />}>
+                                    <Route path="internship" element={<StudentInternship BASE_URL={BASE_URL} studentDetails={studentDetails}  setShowAlert={setShowAlert}/>} />
+                                    <Route path="account" element={<StudentAccount BASE_URL={BASE_URL} studentDetails={studentDetails} setStudentDetails={setStudentDetails}  setShowAlert={setShowAlert}/>} />
+                                    <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={null} />} />
+                                    <Route path="apply" element={<StudentApply BASE_URL={BASE_URL} studentDetails={studentDetails} setShowAlert={setShowAlert}/>} />
+                                </Route>
 
-                            <Route path="startUp" element={<StartUpIndex mode={mode} setMode={setMode} startUpDetails={startUpDetails} setStartUpDetails={setStartUpDetails} />}>
-                                <Route path="internship" element={<StartUpInternship BASE_URL={BASE_URL} startUpDetails={startUpDetails} />} />
-                                <Route path="account" element={<StartUpAccount BASE_URL={BASE_URL} startUpDetails={startUpDetails} setStartUpDetails={setStartUpDetails} timer={timer} />} />
-                                <Route path="addNew" element={<StartUpAddNew BASE_URL={BASE_URL} timer={timer} />} />
-                                <Route path="studentsApplied" element={<StudentsApplied BASE_URL={BASE_URL} timer={timer} />} />
-                                <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={startUpDetails} />} />
-                            </Route>
+                                <Route path="startUp" element={<StartUpIndex mode={mode} setMode={setMode} startUpDetails={startUpDetails} setStartUpDetails={setStartUpDetails} />}>
+                                    <Route path="internship" element={<StartUpInternship BASE_URL={BASE_URL} startUpDetails={startUpDetails} setShowAlert={setShowAlert}/>} />
+                                    <Route path="account" element={<StartUpAccount BASE_URL={BASE_URL} startUpDetails={startUpDetails} setStartUpDetails={setStartUpDetails} />} />
+                                    <Route path="addNew" element={<StartUpAddNew BASE_URL={BASE_URL} setShowAlert={setShowAlert}/>} />
+                                    <Route path="studentsApplied" element={<StudentsApplied BASE_URL={BASE_URL} setShowAlert={setShowAlert}/>} />
+                                    <Route path="details" element={<JobDetails BASE_URL={BASE_URL} startUpDetails={startUpDetails} />} />
+                                </Route>
 
-                            <Route path="*" element={<Error404 />} />
-                        </Routes>
-                    </BrowserRouter >
+                                <Route path="*" element={<Error404 />} />
+                            </Routes>
+                        </BrowserRouter >
+                        {
+                            showAlert ? <AlertSnackbar message={"Congratulations! Your signin was successful"} severity={"success"} timer={timer} /> : <></>
+                        }
+                    </>
+
             }
         </ThemeProvider>
     );

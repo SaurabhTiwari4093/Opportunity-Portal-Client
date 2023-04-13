@@ -2,10 +2,9 @@ import { Card, CardContent, Container, Grid, Typography, TextField, Box, Circula
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
-import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 
-export default function Apply({ BASE_URL, studentDetails, timer }) {
+export default function Apply({ BASE_URL, studentDetails, setShowAlert }) {
     const navigate = useNavigate();
     const { jobId } = useLocation().state;
     const [loading, setLoading] = useState(true);
@@ -100,14 +99,15 @@ export default function Apply({ BASE_URL, studentDetails, timer }) {
                 .then((data) => {
                     if (data.status === 200) {
                         setLoading3(false);
-                        swal({
-                            title: "Applied successfull",
-                            text: "Results will be announced soon",
-                            icon: "success",
-                            timer: timer
-                        }).then(() => {
-                            navigate(-1);
-                        });
+                        // swal({
+                        //     title: "Applied successfull",
+                        //     text: "Results will be announced soon",
+                        //     icon: "success",
+                        //     timer: timer
+                        // }).then(() => {
+                        //     navigate(-1);
+                        // });
+                        setShowAlert(true);
                     }
                     else {
                         console.log(data);

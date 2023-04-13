@@ -9,10 +9,9 @@ import InternshipImage from '../../assets/internshipImage.svg';
 import CofounderImage from '../../assets/cofounderImage.svg';
 import JobImage from '../../assets/jobImage.svg';
 import { useNavigate, useLocation } from 'react-router-dom';
-import swal from 'sweetalert';
 import moment from 'moment';
 
-export default function Internship({ BASE_URL, startUpDetails }) {
+export default function Internship({ BASE_URL, startUpDetails, setShowAlert }) {
   const { type } = useLocation().state;
   const [loading, setLoading] = useState(true);
   const [internshipTableRow, setInternshipTableRow] = useState([]);
@@ -30,7 +29,7 @@ export default function Internship({ BASE_URL, startUpDetails }) {
         designation: oneJsonData.designation,
         type: oneJsonData.type,
         stipend: oneJsonData.stipend,
-        deadline:oneJsonData.deadline,
+        deadline: oneJsonData.deadline,
         details: oneJsonData._id,
         update: oneJsonData._id,
         studentsApplied: oneJsonData._id,
@@ -106,7 +105,7 @@ export default function Internship({ BASE_URL, startUpDetails }) {
       headerName: 'Deadline',
       flex: 1,
       renderCell: ({ value }) => {
-        return (value<moment().format('YYYY-MM-DDThh:mm')?"Deadline passed":moment(value).format('MMMM Do, h:mm a'))
+        return (value < moment().format('YYYY-MM-DDThh:mm') ? "Deadline passed" : moment(value).format('MMMM Do, h:mm a'))
       }
     },
     {
@@ -114,7 +113,7 @@ export default function Internship({ BASE_URL, startUpDetails }) {
       headerName: 'Details',
       flex: 1,
       renderCell: ({ value }) => {
-        return <Button size="small" variant="outlined" onClick={() => { navigate('../details', { state: { jobId: value } }) }}><VisibilityRoundedIcon/></Button>
+        return <Button size="small" variant="outlined" onClick={() => { navigate('../details', { state: { jobId: value } }) }}><VisibilityRoundedIcon /></Button>
       }
     },
     {
@@ -122,7 +121,7 @@ export default function Internship({ BASE_URL, startUpDetails }) {
       headerName: 'Students Applied',
       flex: 1,
       renderCell: ({ value }) => {
-        return <Button size="small" variant="outlined" onClick={() => { navigate('../studentsApplied', { state: { jobId: value} }) }}><PeopleAltRoundedIcon/></Button>
+        return <Button size="small" variant="outlined" onClick={() => { navigate('../studentsApplied', { state: { jobId: value } }) }}><PeopleAltRoundedIcon /></Button>
       }
     },
     {
@@ -130,18 +129,19 @@ export default function Internship({ BASE_URL, startUpDetails }) {
       headerName: 'Update',
       flex: 1,
       renderCell: ({ value }) => {
-        return <Button size="small" variant="outlined" onClick={() => { navigate('../addNew', { state: { type: type, companyName: startUpDetails.companyName, startUpId: startUpDetails._id, jobId: value } }) }}><BorderColorRoundedIcon/></Button>
+        return <Button size="small" variant="outlined" onClick={() => { navigate('../addNew', { state: { type: type, companyName: startUpDetails.companyName, startUpId: startUpDetails._id, jobId: value } }) }}><BorderColorRoundedIcon /></Button>
       }
     },
   ];
 
   const addNew = () => {
     if (startUpDetails.location === undefined) {
-      swal({
-        title: "Incomplete account details",
-        text: "Please complete your account details before adding",
-        icon: "info",
-      })
+      // swal({
+      //   title: "Incomplete account details",
+      //   text: "Please complete your account details before adding",
+      //   icon: "info",
+      // })
+      setShowAlert(true);
     }
     else {
       navigate('../addNew', { state: { type: type, companyName: startUpDetails.companyName, startUpId: startUpDetails._id } })
@@ -178,7 +178,7 @@ export default function Internship({ BASE_URL, startUpDetails }) {
             <Box sx={{ mb: 2, display: { xs: 'block', md: 'flex' }, alignItems: "center", justifyContent: "space-between" }}>
               <Typography variant="h5" >Post {type} Opportunities</Typography>
               <Button variant="contained" sx={{ width: 120, height: 40, mt: { xs: 2, md: 0 } }} onClick={addNew}>
-                <AddRoundedIcon/>
+                <AddRoundedIcon />
               </Button>
             </Box>
             {

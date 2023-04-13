@@ -1,10 +1,9 @@
 import { Card, CardContent, Container, Grid, Typography, TextField, Button, CircularProgress,Box } from '@mui/material'
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import swal from 'sweetalert';
 import moment from 'moment';
 
-export default function AddNew({ BASE_URL, timer }) {
+export default function AddNew({ BASE_URL, setShowAlert }) {
     const navigate = useNavigate();
     const { type, companyName, startUpId, jobId } = useLocation().state;
     const [designation, setDesignation] = useState('');
@@ -52,14 +51,15 @@ export default function AddNew({ BASE_URL, timer }) {
                 .then((data) => {
                     if (data.status === 201) {
                         setLoading(false);
-                        swal({
-                            title: "Opportunity added Successfull",
-                            text: "We are redirecting you to portal",
-                            icon: "success",
-                            timer: timer
-                        }).then(() => {
-                            navigate(-1);
-                        });
+                        // swal({
+                        //     title: "Opportunity added Successfull",
+                        //     text: "We are redirecting you to portal",
+                        //     icon: "success",
+                        //     timer: timer
+                        // }).then(() => {
+                        //     navigate(-1);
+                        // });
+                        setShowAlert(true);
                     }
                     else {
                         console.log(data);
@@ -100,14 +100,15 @@ export default function AddNew({ BASE_URL, timer }) {
                 .then((data) => {
                     if (data.status === 200) {
                         setLoading(false);
-                        swal({
-                            title: "Opportunity updated Successfull",
-                            text: "We are redirecting you to portal",
-                            icon: "success",
-                            timer: timer
-                        }).then(() => {
-                            navigate(-1);
-                        });
+                        // swal({
+                        //     title: "Opportunity updated Successfull",
+                        //     text: "We are redirecting you to portal",
+                        //     icon: "success",
+                        //     timer: timer
+                        // }).then(() => {
+                        //     navigate(-1);
+                        // });
+                        setShowAlert(true);
                     }
                     else {
                         console.log(data)

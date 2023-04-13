@@ -1,10 +1,9 @@
 import { Container, Typography, Card, CardContent, TextField, Grid, Button, CircularProgress, Box, MenuItem } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import AddIcon from '@mui/icons-material/Add';
-import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 
-export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, timer }) {
+export default function Account({ BASE_URL, startUpDetails, setStartUpDetails,setShowAlert }) {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [linkedIn, setLinkedIn] = useState(startUpDetails.linkedIn);
@@ -43,14 +42,15 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, t
                     if (data.status === 200) {
                         setStartUpDetails(data.startUpDetails);
                         setLoading(false);
-                        swal({
-                            title: `Account details ${updateOrSave+"d"} successfull`,
-                            text: "We are redirecting you to portal",
-                            icon: "success",
-                            timer: timer
-                        }).then(() => {
-                            navigate('../internship', { state: { type: 'Internship' } });
-                        });
+                        // swal({
+                        //     title: `Account details ${updateOrSave+"d"} successfull`,
+                        //     text: "We are redirecting you to portal",
+                        //     icon: "success",
+                        //     timer: timer
+                        // }).then(() => {
+                        //     navigate('../internship', { state: { type: 'Internship' } });
+                        // });
+                        setShowAlert(true);
                     }
                     else {
                         console.log(data);

@@ -5,11 +5,10 @@ import AddRoundedIcon from '@mui/icons-material/AddRounded';
 import StartUpImage from '../assets/startUpImage.svg';
 import StudentImage from '../assets/studentImage.svg';
 import OpportunityTable from '../components/table';
-import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
-export default function StudentOrStartUp({ BASE_URL,timer }) {
+export default function StudentOrStartUp({ BASE_URL, setShowAlert }) {
   const [loading, setLoading] = useState(true);
   const [opportunityTableRow, setOpportunityTableRow] = useState([]);
   const navigate = useNavigate();
@@ -103,12 +102,13 @@ export default function StudentOrStartUp({ BASE_URL,timer }) {
       flex: 1,
       renderCell: ({ value }) => {
         return <Button size="small" variant="outlined" disabled={value.deadline < moment().format('YYYY-MM-DDThh:mm') ? true : false} onClick={() => {
-          swal({
-            title: "Please sign up to apply",
-            text: "If already have an account please signin",
-            icon: "info",
-            timer: timer
-          })
+          // swal({
+          //   title: "Please sign up to apply",
+          //   text: "If already have an account please signin",
+          //   icon: "info",
+          //   timer: timer
+          // })
+          setShowAlert(true);
         }}>Apply</Button>
       }
     },
@@ -156,12 +156,13 @@ export default function StudentOrStartUp({ BASE_URL,timer }) {
           <Box sx={{ mb: 2, display: { xs: 'block', md: 'flex' }, alignItems: "center", justifyContent: "space-between" }}>
             <Typography variant="h5" >Opportunities</Typography>
             <Button variant="contained" sx={{ width: 120, height: 40, mt: { xs: 2, md: 0 } }} onClick={() => {
-              swal({
-                title: "Please sign up to post opportunity",
-                text: "If already have an account please signin",
-                icon: "info",
-                timer: timer
-              })
+              // swal({
+              //   title: "Please sign up to post opportunity",
+              //   text: "If already have an account please signin",
+              //   icon: "info",
+              //   timer: timer
+              // })
+              setShowAlert(true);
             }}>
               <AddRoundedIcon />
             </Button>

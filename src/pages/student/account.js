@@ -1,10 +1,9 @@
 import { Container, Typography, Card, CardContent, TextField, Grid, Button, CircularProgress, MenuItem } from '@mui/material';
 import React, { useState } from 'react';
-import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 
 
-export default function Account({ BASE_URL, studentDetails, setStudentDetails,timer }) {
+export default function Account({ BASE_URL, studentDetails, setStudentDetails,setShowAlert={setShowAlert} }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const name = studentDetails.name;
@@ -20,6 +19,7 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails,ti
   const updateStudentAccount = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setShowAlert(false);
     const formData = {
       course: course,
       department: department,
@@ -43,14 +43,16 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails,ti
           if (data.status === 200) {
             setStudentDetails(data.studentDetails);
             setLoading(false);
-            swal({
-              title: `Account details ${updateOrSave+"d"} successfull`,
-              text: "We are redirecting you to portal",
-              icon: "success",
-              timer: timer
-            }).then(() => {
-              navigate('../internship', { state: { type: 'Internship' } });
-            });
+            // swal({
+            //   title: `Account details ${updateOrSave+"d"} successfull`,
+            //   text: "We are redirecting you to portal",
+            //   icon: "success",
+            //   timer: timer
+            // }).then(() => {
+            //   navigate('../internship', { state: { type: 'Internship' } });
+            // });
+            console.log("trying to set show alert to true")
+            setShowAlert(true);
           }
           else {
             console.log(data);

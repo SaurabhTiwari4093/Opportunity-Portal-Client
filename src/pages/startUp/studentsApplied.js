@@ -4,10 +4,9 @@ import StudentAppliedTable from '../../components/table';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import PopOver from '../../components/startUp/popOver';
-import swal from 'sweetalert';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-export default function StudentsApplied({ BASE_URL, timer }) {
+export default function StudentsApplied({ BASE_URL, setShowAlert }) {
     const { jobId } = useLocation().state;
     const [loading, setLoading] = useState(true);
     const [studentsAppliedTableRow, setStudentsAppliedTableRow] = useState([]);
@@ -62,11 +61,12 @@ export default function StudentsApplied({ BASE_URL, timer }) {
     }
 
     const openWhyShouldWeHireYou = (value) => {
-        swal({
-            title: "Cover Letter",
-            text: value,
-            button: "Close",
-        })
+        // swal({
+        //     title: "Cover Letter",
+        //     text: value,
+        //     button: "Close",
+        // })
+        console.log(value);
     }
 
     const studentsAppliedTableColumn = [
@@ -129,7 +129,7 @@ export default function StudentsApplied({ BASE_URL, timer }) {
             headerName: 'Update Status',
             width: 180,
             renderCell: ({ value }) => {
-                return <PopOver status={value.status} studentId={value.studentId} jobId={jobId} BASE_URL={BASE_URL} timer={timer} />
+                return <PopOver status={value.status} studentId={value.studentId} jobId={jobId} BASE_URL={BASE_URL} setShowAlert={setShowAlert} />
             }
         },
     ];
