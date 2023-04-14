@@ -68,7 +68,7 @@ export default function BasicPopover({ BASE_URL, status, studentId, jobId, setSh
                 .then((data) => {
                     if (data.status === 200) {
                         setLoading(false);
-                        setAlertMessage("Status updated successfull");
+                        setAlertMessage("Status updated successfully.");
                         setAlertSeverity("success");
                         setShowAlert(true);
                         handleClose();

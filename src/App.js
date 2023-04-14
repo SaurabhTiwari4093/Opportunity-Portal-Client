@@ -26,7 +26,7 @@ import AlertSnackbar from "../src/components/snackbar";
 const BASE_URL = 'http://localhost:3000';
 //const BASE_URL = 'https://opportunity-portal.edciitd.com';
 
-const timer = 2000;
+const timer = 3000;
 
 export default function App() {
     const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');

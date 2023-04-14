@@ -42,7 +42,7 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
           if (data.status === 200) {
             setStudentDetails(data.studentDetails);
             setLoading(false);
-            setAlertMessage(`Account details ${updateOrSave+"d"} successfull`);
+            setAlertMessage(`Account details ${updateOrSave+"d"} successfully.`);
             setAlertSeverity("success")
             setShowAlert(true);
             navigate('../internship', { state: { type: 'Internship' } });

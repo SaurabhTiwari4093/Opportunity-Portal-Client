@@ -99,7 +99,7 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
                 .then((data) => {
                     if (data.status === 200) {
                         setLoading3(false);
-                        setAlertMessage("Applied successfull.");
+                        setAlertMessage("Applied successfully.");
                         setAlertSeverity("success");
                         setShowAlert(true);
                         navigate(-1);

@@ -51,7 +51,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                 .then((data) => {
                     if (data.status === 201) {
                         setLoading(false);
-                        setAlertMessage("Opportunity added successfull");
+                        setAlertMessage("Opportunity added successfully.");
                         setAlertSeverity("success");
                         setShowAlert(true);
                         navigate(-1);
@@ -95,7 +95,7 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                 .then((data) => {
                     if (data.status === 200) {
                         setLoading(false);
-                        setAlertMessage("Opportunity updated successfull");
+                        setAlertMessage("Opportunity updated successfully.");
                         setAlertSeverity("success");
                         setShowAlert(true);
                         navigate(-1);
