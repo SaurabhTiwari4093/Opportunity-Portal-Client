@@ -113,7 +113,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
       headerName: 'Details',
       flex: 1,
       renderCell: ({ value }) => {
-        return <Button size="small" variant="outlined" onClick={() => { navigate('../details', { state: { jobId: value } }) }}><VisibilityRoundedIcon /></Button>
+        return <Button size="small" onClick={() => { navigate('../details', { state: { jobId: value } }) }}><VisibilityRoundedIcon /></Button>
       }
     },
     {
@@ -121,7 +121,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
       headerName: 'Students Applied',
       flex: 1,
       renderCell: ({ value }) => {
-        return <Button size="small" variant="outlined" onClick={() => { navigate('../studentsApplied', { state: { jobId: value } }) }}><PeopleAltRoundedIcon /></Button>
+        return <Button size="small" onClick={() => { navigate('../studentsApplied', { state: { jobId: value } }) }}><PeopleAltRoundedIcon /></Button>
       }
     },
     {
@@ -129,7 +129,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
       headerName: 'Update',
       flex: 1,
       renderCell: ({ value }) => {
-        return <Button size="small" variant="outlined" onClick={() => { navigate('../addNew', { state: { type: type, companyName: startUpDetails.companyName, startUpId: startUpDetails._id, jobId: value } }) }}><BorderColorRoundedIcon /></Button>
+        return <Button size="small" onClick={() => { navigate('../addNew', { state: { type: type, companyName: startUpDetails.companyName, startUpId: startUpDetails._id, jobId: value } }) }}><BorderColorRoundedIcon /></Button>
       }
     },
   ];
@@ -173,7 +173,7 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
         <Card>
           <CardContent>
             <Box sx={{ mb: 2, display: { xs: 'block', md: 'flex' }, alignItems: "center", justifyContent: "space-between" }}>
-              <Typography variant="h5" >Post {type} Opportunities</Typography>
+              <Typography variant="h5">Post {type} Opportunities</Typography>
               <Button variant="contained" sx={{ width: 120, height: 40, mt: { xs: 2, md: 0 } }} onClick={addNew}>
                 <AddRoundedIcon />
               </Button>

@@ -1,5 +1,6 @@
 import { CardContent, Container, Typography, Card, Button, Box, CircularProgress, Modal,CardActions } from '@mui/material';
-import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
+import LibraryBooksRoundedIcon from '@mui/icons-material/LibraryBooksRounded';
+import HistoryEduIcon from '@mui/icons-material/HistoryEdu';
 import StudentAppliedTable from '../../components/table';
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
@@ -105,7 +106,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
             headerName: 'Cover Letter',
             flex: 1,
             renderCell: ({ value }) => {
-                return <Button size="small" variant="outlined" onClick={() => openWhyShouldWeHireYou(value)}><VisibilityRoundedIcon /></Button>
+                return <Button size="small" onClick={() => openWhyShouldWeHireYou(value)}><HistoryEduIcon/></Button>
             }
         },
         {
@@ -113,7 +114,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
             headerName: 'Resume',
             flex: 1,
             renderCell: ({ value }) => {
-                return <Button size="small" variant="outlined" href={value} target="_blank"><VisibilityRoundedIcon /></Button>
+                return <Button size="small" href={value} target="_blank" rel="noopener noreferrer"><LibraryBooksRoundedIcon/></Button>
             }
         },
         {
@@ -121,7 +122,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessag
             headerName: 'linkedIn',
             flex: 1,
             renderCell: ({ value }) => {
-                return (value === "" || value === undefined) ? "_" : <Button size="small" variant="outlined" href={value} target="_blank"><LinkedInIcon /></Button>
+                return (value === "" || value === undefined) ? "_" : <Button size="small" href={value} target="_blank"><LinkedInIcon /></Button>
             }
         },
         {

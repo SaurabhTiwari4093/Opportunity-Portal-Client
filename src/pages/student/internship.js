@@ -136,7 +136,7 @@ export default function Internship({ BASE_URL, studentDetails,setShowAlert,setAl
       headerName: 'Details',
       flex: 1,
       renderCell: ({ value }) => {
-        return <Button size="small" variant="outlined" onClick={() => { navigate('../details', { state: { jobId: value } }) }}><VisibilityRoundedIcon /></Button>
+        return <Button size="small" onClick={() => { navigate('../details', { state: { jobId: value } }) }}><VisibilityRoundedIcon /></Button>
       }
     },
     {
