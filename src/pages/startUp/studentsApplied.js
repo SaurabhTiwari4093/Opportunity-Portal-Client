@@ -1,4 +1,4 @@
-import { CardContent, Container, Typography, Card, Button, Box, CircularProgress } from '@mui/material';
+import { CardContent, Container, Typography, Card, Button, Box, CircularProgress, Modal,CardActions } from '@mui/material';
 import VisibilityRoundedIcon from '@mui/icons-material/VisibilityRounded';
 import StudentAppliedTable from '../../components/table';
 import React, { useEffect, useState } from 'react';
@@ -6,12 +6,16 @@ import { useLocation } from 'react-router-dom';
 import PopOver from '../../components/startUp/popOver';
 import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
-export default function StudentsApplied({ BASE_URL, setShowAlert,setAlertMessage, setAlertSeverity }) {
+export default function StudentsApplied({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
     const { jobId } = useLocation().state;
     const [loading, setLoading] = useState(true);
     const [studentsAppliedTableRow, setStudentsAppliedTableRow] = useState([]);
+    const [open, setOpen] = React.useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+    const [coverLetter, setCoverLetter] = useState("coverLetter");
 
-    const getStudentsAppliedList = async() => {
+    const getStudentsAppliedList = async () => {
         setLoading(true);
         const requestOptions = {
             method: "GET",
@@ -51,7 +55,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert,setAlertMessage
                 cgpa: oneJsonData.cgpa,
                 whyShouldWeHireYou: oneJsonData.whyShouldWeHireYou,
                 resumeLink: oneJsonData.resumeLink,
-                linkedIn:oneJsonData.linkedIn,
+                linkedIn: oneJsonData.linkedIn,
                 statusUpdate: { status: oneJsonData.status, studentId: oneJsonData.studentId },
             }
             jsonDataArray.push(convertedJsonData);
@@ -61,7 +65,8 @@ export default function StudentsApplied({ BASE_URL, setShowAlert,setAlertMessage
     }
 
     const openWhyShouldWeHireYou = (value) => {
-        console.log(value);
+        setCoverLetter(value);
+        handleOpen();
     }
 
     const studentsAppliedTableColumn = [
@@ -116,7 +121,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert,setAlertMessage
             headerName: 'linkedIn',
             flex: 1,
             renderCell: ({ value }) => {
-                return (value==="" || value===undefined)?"_":<Button size="small" variant="outlined" href={value} target="_blank"><LinkedInIcon/></Button>
+                return (value === "" || value === undefined) ? "_" : <Button size="small" variant="outlined" href={value} target="_blank"><LinkedInIcon /></Button>
             }
         },
         {
@@ -124,7 +129,7 @@ export default function StudentsApplied({ BASE_URL, setShowAlert,setAlertMessage
             headerName: 'Update Status',
             width: 180,
             renderCell: ({ value }) => {
-                return <PopOver status={value.status} studentId={value.studentId} jobId={jobId} BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity}/>
+                return <PopOver status={value.status} studentId={value.studentId} jobId={jobId} BASE_URL={BASE_URL} setShowAlert={setShowAlert} setAlertMessage={setAlertMessage} setAlertSeverity={setAlertSeverity} />
             }
         },
     ];
@@ -134,16 +139,34 @@ export default function StudentsApplied({ BASE_URL, setShowAlert,setAlertMessage
     }, [])
 
     return (
-        <Container sx={{ py: 2, mt: 9 }}>
-            <Typography variant="h5" sx={{ mb: 2 }}>Students Applied</Typography>
-            <Card>
-                <CardContent>
-                    <Typography variant="h5" sx={{ mb: 2 }}>Students Details</Typography>
-                    {
-                        loading ? <Box sx={{ height: 370.5, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> : <StudentAppliedTable column={studentsAppliedTableColumn} row={studentsAppliedTableRow} />
-                    }
-                </CardContent>
-            </Card>
-        </Container>
+        <>
+            <Container sx={{ py: 2, mt: 9 }}>
+                <Typography variant="h5" sx={{ mb: 2 }}>Students Applied</Typography>
+                <Card>
+                    <CardContent>
+                        <Typography variant="h5" sx={{ mb: 2 }}>Students Details</Typography>
+                        {
+                            loading ? <Box sx={{ height: 370.5, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> : <StudentAppliedTable column={studentsAppliedTableColumn} row={studentsAppliedTableRow} />
+                        }
+                    </CardContent>
+                </Card>
+            </Container>
+            <Modal
+                open={open}
+                onClose={handleClose}
+            >
+                <Card sx={{ position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)", width: { xs: "90%", md: 600 } }}>
+                    <CardContent>
+                        <Typography variant="h5" sx={{ mb: 2 }} color="primary">Cover Letter</Typography>
+                        <Typography>
+                            {coverLetter}
+                        </Typography>
+                    </CardContent>
+                    <CardActions sx={{display:"flex",justifyContent:"end"}}>
+                        <Button onClick={handleClose}>Close</Button>
+                    </CardActions>
+                </Card>
+            </Modal>
+        </>
     )
 }
