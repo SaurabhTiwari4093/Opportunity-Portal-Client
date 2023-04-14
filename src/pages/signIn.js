@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, Container, Typography, TextField, CardAc
 import React, { useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function SignIn({ BASE_URL,setShowAlert,setAlertMessage, setAlertSeverity }) {
+export default function SignIn({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const { user } = useLocation().state;
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -12,12 +12,8 @@ export default function SignIn({ BASE_URL,setShowAlert,setAlertMessage, setAlert
     e.preventDefault();
     setLoading(true);
     if (email.substring(email.length - 10, email.length) !== "iitd.ac.in") {
-      // swal({
-      //   title: "Not a IITD email ID",
-      //   text: "Please enter IIT Delhi email ID",
-      //   icon: "info",
-      //   timer: timer
-      // })
+      setAlertMessage("Please enter IIT Delhi email ID.");
+      setAlertSeverity("info");
       setShowAlert(true);
       setLoading(false);
       return
@@ -43,12 +39,8 @@ export default function SignIn({ BASE_URL,setShowAlert,setAlertMessage, setAlert
           }
           else if (data.status === 401) {
             setLoading(false);
-            // swal({
-            //   title: "Account does not exist",
-            //   text: "Please signup to create account",
-            //   icon: "info",
-            //   timer: timer
-            // });
+            setAlertMessage("Account doesn't exist. Please signup.");
+            setAlertSeverity("info");
             setShowAlert(true);
           }
           else {
@@ -85,12 +77,8 @@ export default function SignIn({ BASE_URL,setShowAlert,setAlertMessage, setAlert
           }
           else if (data.status === 401) {
             setLoading(false);
-            // swal({
-            //   title: "Account does not exist",
-            //   text: "Please signup to create account",
-            //   icon: "info",
-            //   timer: timer
-            // });
+            setAlertMessage("Account doesn't exist. Please signup.");
+            setAlertSeverity("info");
             setShowAlert(true);
           }
           else {

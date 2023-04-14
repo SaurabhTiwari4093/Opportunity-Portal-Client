@@ -65,24 +65,15 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
             localStorage.setItem('localStorageStartUpId', data.startUpDetails._id);
             setStartUpDetails(data.startUpDetails);
             setLoading(false);
-            // swal({
-            //   title: "Sign in successfull",
-            //   text: "We are redirecting you to portal",
-            //   icon: "success",
-            //   timer: timer,
-            // }).then(() => {
-            //   navigate('../startUp/internship', { state: { type: 'Internship' } });
-            // });
+            setAlertMessage("Sign in successfull.");
+            setAlertSeverity("success");
             setShowAlert(true);
+            navigate('../startUp/internship', { state: { type: 'Internship' } });
           }
           else if (data.status === 401) {
             setLoading(false);
-            // swal({
-            //   title: "Wrong OTP",
-            //   text: "Please enter correct OTP",
-            //   icon: "info",
-            //   timer: timer,
-            // });
+            setAlertMessage("Wrong OTP.");
+            setAlertSeverity("error");
             setShowAlert(true);
           }
           else {
@@ -118,24 +109,15 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
             localStorage.setItem('localStorageStartUpId', data.startUpDetails._id);
             setStartUpDetails(data.startUpDetails);
             setLoading(false);
-            // swal({
-            //   title: "Sign Up successfull",
-            //   text: "We are redirecting you to portal",
-            //   icon: "success",
-            //   timer: timer,
-            // }).then(() => {
-            //   navigate('../startUp/account');
-            // });
+            setAlertMessage("Sign Up successfull");
+            setAlertSeverity("success");
             setShowAlert(true);
+            navigate('../startUp/account');
           }
           else if (data.status === 401) {
             setLoading(false);
-            // swal({
-            //   title: "Wrong OTP",
-            //   text: "Please enter correct OTP",
-            //   icon: "info",
-            //   timer: timer,
-            // });
+            setAlertMessage("Wrong OTP.");
+            setAlertSeverity("error");
             setShowAlert(true);
           }
           else {
@@ -171,24 +153,15 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
             localStorage.setItem('localStorageStudentId', data.studentDetails._id);
             setStudentDetails(data.studentDetails);
             setLoading(false);
-            // swal({
-            //   title: "Sign in successfull",
-            //   text: "We are redirecting you to portal",
-            //   icon: "success",
-            //   timer: timer,
-            // }).then(() => {
-            //   navigate('../student/internship', { state: { type: 'Internship' } });
-            // });
+            setAlertMessage("Sign in successfull.");
+            setAlertSeverity("success");
             setShowAlert(true);
+            navigate('../student/internship', { state: { type: 'Internship' } });
           }
           else if (data.status === 401) {
             setLoading(false);
-            // swal({
-            //   title: "Wrong OTP",
-            //   text: "Please enter correct OTP",
-            //   icon: "info",
-            //   timer: timer,
-            // });
+            setAlertMessage("Wrong OTP.");
+            setAlertSeverity("error");
             setShowAlert(true);
           }
           else {
@@ -224,24 +197,15 @@ export default function OTPVerify({ BASE_URL, setStartUpDetails, setStudentDetai
             localStorage.setItem('localStorageStudentId', data.studentDetails._id);
             setStudentDetails(data.studentDetails);
             setLoading(false);
-            // swal({
-            //   title: "Sign up successfull",
-            //   text: "We are redirecting you to portal",
-            //   icon: "success",
-            //   timer: timer,
-            // }).then(() => {
-            //   navigate('../student/account');
-            // });
+            setAlertMessage("Sign Up successfull");
+            setAlertSeverity("success");
             setShowAlert(true);
+            navigate('../student/account');
           }
           else if (data.status === 401) {
             setLoading(false);
-            // swal({
-            //   title: data.message,
-            //   text: "Please enter correct details",
-            //   icon: "info",
-            //   timer: timer,
-            // });
+            setAlertMessage("Wrong OTP.");
+            setAlertSeverity("error");
             setShowAlert(true);
           }
           else {

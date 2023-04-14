@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, Container, Typography, TextField, CardAc
 import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-export default function SignUp({ BASE_URL,setShowAlert,setAlertMessage, setAlertSeverity }) {
+export default function SignUp({ BASE_URL, setShowAlert, setAlertMessage, setAlertSeverity }) {
   const { user } = useLocation().state;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -13,12 +13,8 @@ export default function SignUp({ BASE_URL,setShowAlert,setAlertMessage, setAlert
     e.preventDefault();
     setLoading(true);
     if (email.substring(email.length - 10, email.length) !== "iitd.ac.in") {
-      // swal({
-      //   title: "Not a IITD email ID",
-      //   text: "Please enter IIT Delhi email ID",
-      //   icon: "info",
-      //   timer: timer
-      // })
+      setAlertMessage("Please enter IIT Delhi email ID.");
+      setAlertSeverity("info");
       setShowAlert(true);
       setLoading(false);
       return
@@ -42,16 +38,12 @@ export default function SignUp({ BASE_URL,setShowAlert,setAlertMessage, setAlert
           .then((data) => {
             if (data.status === 200) {
               setLoading(false);
-              navigate('../otpVerify', { state: { user: "Student", signInOrSignUp: "SignUp", email: data.studentDetails.email, name:data.studentDetails.name } });
+              navigate('../otpVerify', { state: { user: "Student", signInOrSignUp: "SignUp", email: data.studentDetails.email, name: data.studentDetails.name } });
             }
             else if (data.status === 401) {
               setLoading(false);
-              // swal({
-              //   title: "Account already exist",
-              //   text: "Please sign in to your account",
-              //   icon: "info",
-              //   timer: timer
-              // });
+              setAlertMessage("Account already exist. Please signin.");
+              setAlertSeverity("info");
               setShowAlert(true);
             }
             else {
@@ -86,16 +78,12 @@ export default function SignUp({ BASE_URL,setShowAlert,setAlertMessage, setAlert
         .then((data) => {
           if (data.status === 200) {
             setLoading(false);
-            navigate('../otpVerify', { state: { user: "Startup", signInOrSignUp: "SignUp", email: data.startUpDetails.email, name:data.startUpDetails.companyName } });
+            navigate('../otpVerify', { state: { user: "Startup", signInOrSignUp: "SignUp", email: data.startUpDetails.email, name: data.startUpDetails.companyName } });
           }
           else if (data.status === 401) {
             setLoading(false);
-            // swal({
-            //   title: "Account already exist",
-            //   text: "Please sign in to your account",
-            //   icon: "info",
-            //   timer: timer
-            // });
+            setAlertMessage("Account already exist. Please signin.");
+            setAlertSeverity("info");
             setShowAlert(true);
           }
           else {

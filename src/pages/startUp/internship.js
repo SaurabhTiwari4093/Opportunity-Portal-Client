@@ -136,11 +136,8 @@ export default function Internship({ BASE_URL, startUpDetails, setShowAlert,setA
 
   const addNew = () => {
     if (startUpDetails.location === undefined) {
-      // swal({
-      //   title: "Incomplete account details",
-      //   text: "Please complete your account details before adding",
-      //   icon: "info",
-      // })
+      setAlertMessage("Please complete account details before adding");
+      setAlertSeverity("info");
       setShowAlert(true);
     }
     else {

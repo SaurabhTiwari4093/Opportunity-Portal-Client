@@ -51,15 +51,10 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                 .then((data) => {
                     if (data.status === 201) {
                         setLoading(false);
-                        // swal({
-                        //     title: "Opportunity added Successfull",
-                        //     text: "We are redirecting you to portal",
-                        //     icon: "success",
-                        //     timer: timer
-                        // }).then(() => {
-                        //     navigate(-1);
-                        // });
+                        setAlertMessage("Opportunity added successfull");
+                        setAlertSeverity("success");
                         setShowAlert(true);
+                        navigate(-1);
                     }
                     else {
                         console.log(data);
@@ -100,15 +95,10 @@ export default function AddNew({ BASE_URL, setShowAlert,setAlertMessage, setAler
                 .then((data) => {
                     if (data.status === 200) {
                         setLoading(false);
-                        // swal({
-                        //     title: "Opportunity updated Successfull",
-                        //     text: "We are redirecting you to portal",
-                        //     icon: "success",
-                        //     timer: timer
-                        // }).then(() => {
-                        //     navigate(-1);
-                        // });
+                        setAlertMessage("Opportunity updated successfull");
+                        setAlertSeverity("success");
                         setShowAlert(true);
+                        navigate(-1);
                     }
                     else {
                         console.log(data)

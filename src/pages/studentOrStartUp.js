@@ -102,12 +102,8 @@ export default function StudentOrStartUp({ BASE_URL, setShowAlert, setAlertMessa
       flex: 1,
       renderCell: ({ value }) => {
         return <Button size="small" variant="outlined" disabled={value.deadline < moment().format('YYYY-MM-DDThh:mm') ? true : false} onClick={() => {
-          // swal({
-          //   title: "Please sign up to apply",
-          //   text: "If already have an account please signin",
-          //   icon: "info",
-          //   timer: timer
-          // })
+          setAlertMessage("Please sign up to apply.");
+          setAlertSeverity("info");
           setShowAlert(true);
         }}>Apply</Button>
       }
@@ -156,12 +152,8 @@ export default function StudentOrStartUp({ BASE_URL, setShowAlert, setAlertMessa
           <Box sx={{ mb: 2, display: { xs: 'block', md: 'flex' }, alignItems: "center", justifyContent: "space-between" }}>
             <Typography variant="h5" >Opportunities</Typography>
             <Button variant="contained" sx={{ width: 120, height: 40, mt: { xs: 2, md: 0 } }} onClick={() => {
-              // swal({
-              //   title: "Please sign up to post opportunity",
-              //   text: "If already have an account please signin",
-              //   icon: "info",
-              //   timer: timer
-              // })
+              setAlertMessage("Please sign up to post opportunity.");
+              setAlertSeverity("info");
               setShowAlert(true);
             }}>
               <AddRoundedIcon />

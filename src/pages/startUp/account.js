@@ -42,15 +42,10 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails,se
                     if (data.status === 200) {
                         setStartUpDetails(data.startUpDetails);
                         setLoading(false);
-                        // swal({
-                        //     title: `Account details ${updateOrSave+"d"} successfull`,
-                        //     text: "We are redirecting you to portal",
-                        //     icon: "success",
-                        //     timer: timer
-                        // }).then(() => {
-                        //     navigate('../internship', { state: { type: 'Internship' } });
-                        // });
+                        setAlertMessage(`Account details ${updateOrSave+"d"} successfull`);
+                        setAlertSeverity("success")
                         setShowAlert(true);
+                        navigate('../internship', { state: { type: 'Internship' } });
                     }
                     else {
                         console.log(data);

@@ -61,11 +61,6 @@ export default function StudentsApplied({ BASE_URL, setShowAlert,setAlertMessage
     }
 
     const openWhyShouldWeHireYou = (value) => {
-        // swal({
-        //     title: "Cover Letter",
-        //     text: value,
-        //     button: "Close",
-        // })
         console.log(value);
     }
 

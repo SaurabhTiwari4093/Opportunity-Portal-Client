@@ -42,16 +42,10 @@ export default function Account({ BASE_URL, studentDetails, setStudentDetails, s
           if (data.status === 200) {
             setStudentDetails(data.studentDetails);
             setLoading(false);
-            // swal({
-            //   title: `Account details ${updateOrSave+"d"} successfull`,
-            //   text: "We are redirecting you to portal",
-            //   icon: "success",
-            //   timer: timer
-            // }).then(() => {
-            //   navigate('../internship', { state: { type: 'Internship' } });
-            // });
-            console.log("trying to set show alert to true")
+            setAlertMessage(`Account details ${updateOrSave+"d"} successfull`);
+            setAlertSeverity("success")
             setShowAlert(true);
+            navigate('../internship', { state: { type: 'Internship' } });
           }
           else {
             console.log(data);

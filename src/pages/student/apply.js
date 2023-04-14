@@ -99,15 +99,10 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
                 .then((data) => {
                     if (data.status === 200) {
                         setLoading3(false);
-                        // swal({
-                        //     title: "Applied successfull",
-                        //     text: "Results will be announced soon",
-                        //     icon: "success",
-                        //     timer: timer
-                        // }).then(() => {
-                        //     navigate(-1);
-                        // });
+                        setAlertMessage("Applied successfull.");
+                        setAlertSeverity("success");
                         setShowAlert(true);
+                        navigate(-1);
                     }
                     else {
                         console.log(data);

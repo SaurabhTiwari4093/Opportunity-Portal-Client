@@ -9,11 +9,8 @@ export default function BasicPopover({ jobId, status, studentDetails, deadline,s
 
     const handleClick = () => {
         if (studentDetails.resumeLink === undefined || studentDetails.resumeLink === "") {
-            // swal({
-            //     title: "Incomplete account details",
-            //     text: "Please complete your account details before applying",
-            //     icon: "info",
-            // })
+            setAlertMessage("Please complete account details before applying");
+            setAlertSeverity("info")
             setShowAlert(true);
         }
         else if (jobStatus === "Not Applied") {
