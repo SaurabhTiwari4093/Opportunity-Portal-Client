@@ -134,7 +134,7 @@ export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlert
                                     <TextField variant="standard" label="Email" fullWidth value={jobStartUpDetails.email} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>
                                 {
-                                    jobStartUpDetails.linkedIn !== "" ? <Grid item xs={12} md={6}>
+                                     (jobStartUpDetails.linkedIn !== "" && jobStartUpDetails.linkedIn!==undefined) ? <Grid item xs={12} md={6}>
                                         <a href={jobStartUpDetails.linkedIn} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
                                             <TextField color='primary' variant="standard" label="LinkedIn" fullWidth value={jobStartUpDetails.linkedIn} InputProps={{ disableUnderline: true, readOnly: true }} sx={{ input: { cursor: "pointer", color: "#1976d2" } }} />
                                         </a>
