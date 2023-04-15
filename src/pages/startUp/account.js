@@ -1,9 +1,10 @@
-import { Container, Typography, Card, CardContent, TextField, Grid, Button, CircularProgress, Box, MenuItem } from '@mui/material';
+import { Container, Typography, Card, CardContent, TextField, Grid, Button, CircularProgress, Box, MenuItem, IconButton } from '@mui/material';
 import React, { useState, useEffect } from 'react';
 import AddIcon from '@mui/icons-material/Add';
+import RemoveRoundedIcon from '@mui/icons-material/RemoveRounded';
 import { useNavigate } from 'react-router-dom';
 
-export default function Account({ BASE_URL, startUpDetails, setStartUpDetails,setShowAlert,setAlertMessage, setAlertSeverity }) {
+export default function Account({ BASE_URL, startUpDetails, setStartUpDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const [linkedIn, setLinkedIn] = useState(startUpDetails.linkedIn);
@@ -42,7 +43,7 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails,se
                     if (data.status === 200) {
                         setStartUpDetails(data.startUpDetails);
                         setLoading(false);
-                        setAlertMessage(`Account details ${updateOrSave+"d"} successfully.`);
+                        setAlertMessage(`Account details ${updateOrSave + "d"} successfully.`);
                         setAlertSeverity("success")
                         setShowAlert(true);
                         navigate('../internship', { state: { type: 'Internship' } });
@@ -59,6 +60,10 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails,se
 
     const addFounder = () => {
         setFounder(current => [...current, { id: current.length + 1, name: "", bio: "" }]);
+    }
+
+    const removeFounder = () => {
+        setFounder(founder.slice(0, -1))
     }
 
     const updateFounderName = (value, id) => {
@@ -142,9 +147,14 @@ export default function Account({ BASE_URL, startUpDetails, setStartUpDetails,se
                     <CardContent>
                         <Box sx={{ display: 'flex', alignItems: "center", justifyContent: "space-between" }}>
                             <Typography variant="h5" >Founder</Typography>
-                            <Button variant="outlined" size="small" onClick={addFounder}>
-                                <AddIcon />
-                            </Button>
+                            <Box sx={{ gap: 2 }}>
+                                <IconButton size="small" onClick={addFounder} color="success">
+                                    <AddIcon />
+                                </IconButton>
+                                <IconButton size="small" onClick={removeFounder} color="error" disabled={founder.length === 1}>
+                                    <RemoveRoundedIcon />
+                                </IconButton>
+                            </Box>
                         </Box>
                         {
                             founder.map((value, key) => {
