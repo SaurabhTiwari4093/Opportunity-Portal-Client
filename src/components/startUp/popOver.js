@@ -3,7 +3,6 @@ import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
 import { Box, TextField, MenuItem, CircularProgress } from '@mui/material';
 import ArrowDropDownRoundedIcon from '@mui/icons-material/ArrowDropDownRounded';
-import swal from 'sweetalert';
 
 const statusArray = [
     {
@@ -28,7 +27,7 @@ const statusArray = [
     },
 ];
 
-export default function BasicPopover({ BASE_URL, status, studentId, jobId, timer }) {
+export default function BasicPopover({ BASE_URL, status, studentId, jobId, setShowAlert,setAlertMessage, setAlertSeverity }) {
     const [loading, setLoading] = useState(false);
     const [anchorEl, setAnchorEl] = useState(null);
     const [statusStudent, setStatusStudent] = useState(status);
@@ -69,32 +68,18 @@ export default function BasicPopover({ BASE_URL, status, studentId, jobId, timer
                 .then((data) => {
                     if (data.status === 200) {
                         setLoading(false);
-                        swal({
-                            title: "Good job!",
-                            text:"Status updated successfull",
-                            icon: "success",
-                            timer:timer
-                        }).then(() => {
-                            handleClose();
-                        });
+                        setAlertMessage("Status updated successfully.");
+                        setAlertSeverity("success");
+                        setShowAlert(true);
+                        handleClose();
                     }
                     else {
-                        setLoading(false);
-                        swal({
-                            title: "Something went wrong",
-                            text: data.message,
-                            icon: "info",
-                        });
+                        console.log(data);
                     }
                 })
         }
         catch (error) {
-            setLoading(false);
-            swal({
-                title: "Some error occured",
-                text: error,
-                icon: "error",
-            });
+            console.log(error);
         }
     }
 

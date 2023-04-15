@@ -2,10 +2,9 @@ import { Card, CardContent, Container, Grid, Typography, TextField, Box, Circula
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import moment from 'moment';
-import swal from 'sweetalert';
 import { useNavigate } from 'react-router-dom';
 
-export default function Apply({ BASE_URL, studentDetails, timer }) {
+export default function Apply({ BASE_URL, studentDetails, setShowAlert, setAlertMessage, setAlertSeverity }) {
     const navigate = useNavigate();
     const { jobId } = useLocation().state;
     const [loading, setLoading] = useState(true);
@@ -100,14 +99,10 @@ export default function Apply({ BASE_URL, studentDetails, timer }) {
                 .then((data) => {
                     if (data.status === 200) {
                         setLoading3(false);
-                        swal({
-                            title: "Applied successfull",
-                            text: "Results will be announced soon",
-                            icon: "success",
-                            timer: timer
-                        }).then(() => {
-                            navigate(-1);
-                        });
+                        setAlertMessage("Applied successfully.");
+                        setAlertSeverity("success");
+                        setShowAlert(true);
+                        navigate(-1);
                     }
                     else {
                         console.log(data);
@@ -139,7 +134,7 @@ export default function Apply({ BASE_URL, studentDetails, timer }) {
                                     <TextField variant="standard" label="Email" fullWidth value={jobStartUpDetails.email} InputProps={{ disableUnderline: true, readOnly: true }} />
                                 </Grid>
                                 {
-                                    jobStartUpDetails.linkedIn !== "" ? <Grid item xs={12} md={6}>
+                                     (jobStartUpDetails.linkedIn !== "" && jobStartUpDetails.linkedIn!==undefined) ? <Grid item xs={12} md={6}>
                                         <a href={jobStartUpDetails.linkedIn} target='_blank' rel="noopener noreferrer" style={{ textDecorationColor: "#1976d2", textUnderlineOffset: 2 }}>
                                             <TextField color='primary' variant="standard" label="LinkedIn" fullWidth value={jobStartUpDetails.linkedIn} InputProps={{ disableUnderline: true, readOnly: true }} sx={{ input: { cursor: "pointer", color: "#1976d2" } }} />
                                         </a>
@@ -241,7 +236,7 @@ export default function Apply({ BASE_URL, studentDetails, timer }) {
                     {
                         (loading || loading2) ? <Box sx={{ height: 300, display: 'flex', justifyContent: 'center', alignItems: "center" }}><CircularProgress /></Box> :
                             <form onSubmit={submitResume}>
-                                <TextField sx={{mb:2}} type="text" label={"Why should we hire you?"} multiline={true} minRows={4} variant="outlined" value={whyShouldWeHireYou} onChange={(e) => setWhyShouldWeHireYou(e.target.value)} fullWidth required />
+                                <TextField sx={{ mb: 2 }} type="text" label={"Why should we hire you?"} multiline={true} minRows={4} variant="outlined" value={whyShouldWeHireYou} onChange={(e) => setWhyShouldWeHireYou(e.target.value)} fullWidth required />
                                 <Button variant="contained" type="submit" sx={{ width: 120, height: 40 }}>
                                     {
                                         loading3 ? <CircularProgress sx={{ color: "white" }} size={20} /> : <Typography>Submit</Typography>
